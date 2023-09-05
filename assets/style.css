@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100%;
+  font-family: 'Thasadith', sans-serif;
+  font-size: 1.6rem;
+}
+
+/* Helper class */
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Landing page */
+.landing-page {
+  margin: 10rem 0;
+  gap: 8.2rem;
+}
+
+.landing-heading {
+  font-size: 5.2rem;
+}
+
+.slider {
+  position: relative;
+  width: 52rem;
+  height: 26rem;
+  box-shadow: 0 1px 15px 5px rgba(0, 0, 0, 0.05);
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.active {
+  opacity: 1;
+}
+
+.slide p {
+  margin: 1.8rem 0;
+}
+
+.enjoy {
+  font-size: 2.4rem;
+}
+
+.btn {
+  padding: 1.6rem 3.2rem;
+  border: none;
+  border-radius: 11px;
+  background-color: #f44336;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  padding: 1.6rem 3.2rem;
+  border: 1px solid #f44336;
+  background-color: #fff;
+  color: #f44336;
+  cursor: pointer;
+  box-shadow: 0 1px 15px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Pick an image */
+.pick-image-page {
+  gap: 12rem;
+  margin-top: 10rem;
+  justify-content: start;
+}
+
+.pick-image-heading {
+  font-size: 3.2rem;
+}
+
+.images {
+  display: flex;
+}
+
+.img {
+  box-sizing: border-box;
+  width: 15rem;
+  height: 15rem;
+  border: 10px solid transparent;
+
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.img-active {
+  box-shadow: 1px 1px 20px 5px rgba(0, 0, 0, 0.2);
+  border: 10px solid #fff;
+}

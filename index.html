@@ -6,31 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8 Puzzle</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Thasadith:wght@400&display=swap" rel="stylesheet">
-    <script defer src="app.js"></script>
+    <script defer src="scripts/app.js"></script>
   </head>
 
-  <body class="flex-center">
+  <body>
     <div class="landing-page flex-center">
-      <h1 class="heading">8 Puzzle Game</h1>
+      <h1 class="landing-heading">8 Puzzle Game</h1>
       <div class="slider">
-        <div class="flex-center">
+        <div class="slide flex-center active">
           <p>Asman Coding Mentorship</p>
           <p>Project</p>
           <p>Fall 2023</p>
         </div>
-        <div class="flex-center display-none">
+        <div class="slide flex-center">
           <p>by</p>
           <p>Merjen Garajayeva</p>
         </div>
-        <div class="flex-center display-none">
-          <p>Enjoy!</p>
+        <div class="slide flex-center">
+          <p class="enjoy">Enjoy!</p>
         </div>
       </div>
-      <button class="start-btn">START</button>
+      <button class="btn start-btn">START</button>
+    </div>
+
+    <div class="pick-image-page flex-center">
+      <h4 class="pick-image-heading">Pick an Image</h4>
+      <div class="images">
+        <img class="img" src="assets/imgs/michael-scott.jpeg" alt="M. Scott from The Office TV Show">
+        <img class="img" src="assets/imgs/joey.jpeg" alt="Joey from Friends TV">
+        <img class="img" src="assets/imgs/barney.jpeg" alt="Barney from HIMYM TV">
+      </div>
+      <button class="btn continue-btn">Continue</button>
     </div>
   </body>
 
