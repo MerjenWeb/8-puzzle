@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Thasadith:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Thasadith:wght@400&700display=swap" rel="stylesheet">
     <script defer src="scripts/app.js"></script>
   </head>
 
   <body>
-    <div class="landing-page flex-center">
-      <h1 class="landing-heading">8 Puzzle Game</h1>
+    <div class="landing-page flex-center margin-top-bottom gap-8">
+      <h1 class="heading">8 Puzzle Game</h1>
       <div class="slider">
         <div class="slide flex-center active">
           <p>Asman Coding Mentorship</p>
@@ -33,14 +33,33 @@
       <button class="btn start-btn">START</button>
     </div>
 
-    <div class="pick-image-page flex-center">
-      <h4 class="pick-image-heading">Pick an Image</h4>
+    <div class="pick-image-page flex-center margin-top-bottom gap-8">
+      <h4 class="subheading">Pick an Image</h4>
       <div class="images">
         <img class="img" src="assets/imgs/michael-scott.jpeg" alt="M. Scott from The Office TV Show">
         <img class="img" src="assets/imgs/joey.jpeg" alt="Joey from Friends TV">
-        <img class="img" src="assets/imgs/barney.jpeg" alt="Barney from HIMYM TV">
+        <img class="img" src="assets/imgs/barney.jpeg" alt="Barney from HIMYM TV Show">
       </div>
       <button class="btn continue-btn">Continue</button>
+    </div>
+
+    <div class="puzzle-page flex-center margin-top-bottom">
+      <div class="puzzle-card">
+      </div>
+      <div class="shuffle-card flex-center">
+        <h4 class="subheading">Select Shuffle Amount</h4>
+        <div class="dropdown">
+          <button class="dropdown-btn">Choose shuffle
+            <span>&#9662;</span>
+          </button>
+          <ul class="options display-none">
+            <li class="option option-0 chosen-default" aria-disabled="true">Choose shuffle</li>
+            <li class="option option-1">3 moves</li>
+            <li class="option option-2">30 moves</li>
+          </ul>
+          <button class="btn start-shuffle-btn display-none">START</button>
+        </div>
+      </div>
     </div>
   </body>
 
