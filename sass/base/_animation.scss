@@ -1,0 +1,20 @@
+@keyframes slideAnimation {
+  // How do we want the elements to look at the:
+  // Start
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  // Finish
+  100% {
+    opacity: 0;
+  }
+}

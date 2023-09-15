@@ -1,60 +1,71 @@
 'use strict';
-// Pages Variables
-const landingPage = document.querySelector('.landing-page');
-const imgPickPage = document.querySelector('.pick-image-page');
-const puzzlePage = document.querySelector('.puzzle-page');
+// VARIABLES
+// Sections
+const homePage = document.querySelector('.section-homepage');
+const imgPickPage = document.querySelector('.section-image-selection');
+const puzzlePage = document.querySelector('.section-puzzle');
 
 // Buttons
-const startBtn = document.querySelector('.start-btn');
-const continueBtn = document.querySelector('.continue-btn');
-const dropdownBtn = document.querySelector('.dropdown-btn');
-const shuffleBtn = document.querySelector('.start-shuffle-btn');
+const startBtn = document.querySelector('.btn--start');
+const continueBtn = document.querySelector('.btn--continue');
+const dropdownBtn = document.querySelector('.dropdown__btn');
+const shuffleBtn = document.querySelector('.btn--shuffle');
 
-// Slider Variables
-const slides = [...document.querySelectorAll('.slide')];
+// Slider
+const slides = [...document.querySelectorAll('.slider__slide')];
 let slideIndex = 0; // Start point
 
-// Image Variables
-const imgs = [...document.querySelectorAll('.img')];
+// Images
+const imgs = [...document.querySelectorAll('.image-box__img')];
+console.log(imgs);
 let activeImgIndex = -1;
 
-// Shuffle Variables
+// Shuffle / Dropdown
 const puzzleCard = document.querySelector('.puzzle-card');
-const options = document.querySelector('.options');
-const optionElements = [...document.querySelectorAll('.option')];
+const dropdownBox = document.querySelector('.dropdown');
+const dropdownListEl = document.querySelector('.dropdown__options');
+const dropdownListItems = [...document.querySelectorAll('.dropdown__option')];
+const dropdownOptionLabel = [
+  ...document.querySelectorAll('.dropdown__option-label'),
+];
 let activeMovesAmount;
 let isOpen = false;
 
-// Initial state
+// SEQUENCE
+initialState();
+startBtn.addEventListener('click', showImgPickPage);
+handleImageClickEvents();
+continueBtn.addEventListener('click', showPuzzlePage);
+
+// INITIAL STATE
 function initialState() {
   imgPickPage.style.display = 'none';
-  continueBtn.style.display = 'none';
   puzzlePage.style.display = 'none';
   slide();
 }
 
-// Landing page (slider)
+// Homepage (slider)
 function slide() {
   if (slideIndex < slides.length) {
-    slides[slideIndex].classList.add('active');
+    slides[slideIndex].classList.add('slider__slide--active');
     slideIndex++;
-    setTimeout(slideOut, 2500);
+    setTimeout(slideOut, 3500);
   }
-}
 
-function slideOut() {
-  if (slideIndex > 0) {
-    slides[slideIndex - 1].classList.remove('active');
-    if (slideIndex === slides.length) {
-      slideIndex = 0; // Reset index to 0 when it reaches the end
+  function slideOut() {
+    if (slideIndex > 0) {
+      slides[slideIndex - 1].classList.remove('slider__slide--active');
+      if (slideIndex === slides.length) {
+        slideIndex = 0; // Reset index to 0 when it reaches the end
+      }
+      setTimeout(slide, 50);
     }
-    setTimeout(slide, 500);
   }
 }
 
 // Pick an image
-function showImagePickPage() {
-  landingPage.style.display = 'none';
+function showImgPickPage() {
+  homePage.style.display = 'none';
   imgPickPage.style.display = 'flex';
 }
 
@@ -63,53 +74,80 @@ function handleImageClickEvents() {
     img.addEventListener('click', function () {
       if (activeImgIndex !== i) {
         if (activeImgIndex !== -1) {
-          imgs[activeImgIndex].classList.remove('img-active');
+          imgs[activeImgIndex].classList.remove('image-box__img--small');
         }
-        img.classList.add('img-active');
+        img.classList.add('image-box__img--small');
         activeImgIndex = i;
       }
-      continueBtn.style.display = 'block';
+      continueBtn.classList.remove('hidden');
+
       return activeImgIndex;
     });
   }
 }
 
+// Puzzle page
 function showPuzzlePage() {
   imgPickPage.style.display = 'none';
   puzzlePage.style.display = 'flex';
-  imgs[activeImgIndex].classList.remove('img-active');
-  imgs[activeImgIndex].classList.add('shuffle-img');
-  puzzleCard.insertAdjacentElement('beforeend', imgs[activeImgIndex]);
+  const image = imgs[activeImgIndex];
+
+  image.classList.remove('image-box__img--small');
+  image.classList.add('puzzle-card__img');
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Get references to the image and container
+  console.log(puzzleCard, image);
+  const numRows = 3;
+  const numCols = 3;
+  const imageWidth = 480;
+  const divWidth = imageWidth / numCols;
+  const divHeight = imageWidth / numRows;
+
+  // Loop through each container and its corresponding image
+  for (let i = 0; i < numRows; i++) {
+    for (let j = 0; j < numCols; j++) {
+      const div = document.createElement('div');
+      div.style.position = 'absolute';
+      div.style.width = `${divWidth}px`;
+      div.style.height = `${divHeight}px`;
+      div.style.left = `${j * divWidth}px`;
+      div.style.top = `${i * divHeight}px`;
+      div.style.backgroundImage = `url(${image.src})`;
+      div.style.backgroundPosition = `-${j * divWidth}px -${i * divHeight}px`;
+      div.style.border = '2px solid green'; // Optional: Add borders for better visualization
+      div.style.margin = '10px'; // Optional: Add borders for better visualization
+      div.style.borderRadius = '17px'; // Optional: Add borders for better visualization
+      div.style.gap = '5px'; // Optional: Add borders for better visualization
+      puzzleCard.appendChild(div);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  }
 }
-
-// Sequence
-initialState();
-startBtn.addEventListener('click', showImagePickPage);
-handleImageClickEvents();
-continueBtn.addEventListener('click', showPuzzlePage);
-
 // Select Shuffle Amount
 dropdownBtn.addEventListener('click', function () {
-  options.classList.toggle('display-none');
+  dropdownListItems[0].classList.add('default');
+  dropdownListEl.classList.toggle('hidden');
+  if (activeMovesAmount !== undefined) shuffleBtn.classList.remove('hidden');
 });
 
-// Continue working from here
-optionElements.forEach((el, i) => {
+dropdownListItems.forEach((el, i) => {
   el.addEventListener('click', function () {
-    optionElements.map(el => {
-      el.classList.remove('chosen-default');
-    });
-    if (!el.classList.contains('chosen-default')) {
-      el.classList.toggle('chosen-option');
-      activeMovesAmount = el.textContent.replace(/\D/g, '');
-      options.classList.add('display-none');
-      shuffleBtn.classList.remove('display-none');
-    }
-
-    console.log(activeMovesAmount);
+    dropdownBtn.textContent = dropdownOptionLabel[i - 1].innerHTML;
+    const chosenMoves = dropdownBtn.textContent;
+    console.log(chosenMoves);
+    dropdownListEl.classList.add('hidden');
+    shuffleBtn.classList.remove('hidden');
+    activeMovesAmount = chosenMoves.replace(/\D/g, '');
+    console.log(activeMovesAmount); //logs 2 times
   });
 });
 
-// the user clicks on element and to that element we add - element[activeMovesAmount].classList.add('chosen-option')
-// if the user clicks on the different one - then element[activeMovesAmount].classList.add('chosen-option')
-// So there is only one activeMovesAmount
+// document.addEventListener('click', function (event) {
+//   if (!dropdownBox.classList.contains('hidden')) {
+//     dropdownListEl.classList.toggle('hidden');
+//   }
+// });
+
+dropdownListEl.addEventListener('mouseover', function () {
+  dropdownListItems[0].classList.remove('default');
+});

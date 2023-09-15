@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8 Puzzle</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Thasadith:wght@400&700display=swap" rel="stylesheet">
@@ -14,53 +14,62 @@
   </head>
 
   <body>
-    <div class="landing-page flex-center margin-top-bottom gap-8">
-      <h1 class="heading">8 Puzzle Game</h1>
+
+    <section class="section-homepage">
+      <h1 class="homepage__heading heading-primary">8 Puzzle Game</h1>
       <div class="slider">
-        <div class="slide flex-center active">
-          <p>Asman Coding Mentorship</p>
-          <p>Project</p>
-          <p>Fall 2023</p>
+        <div class="slider__slide">
+          <p class="text">Asman Coding Mentorship</p>
+          <p class="text">Project</p>
+          <p class="text">Fall 2023</p>
         </div>
-        <div class="slide flex-center">
-          <p>by</p>
-          <p>Merjen Garajayeva</p>
+        <div class="slider__slide">
+          <p class="text">by</p>
+          <p class="text">Merjen Garajayeva</p>
         </div>
-        <div class="slide flex-center">
-          <p class="enjoy">Enjoy!</p>
+        <div class="slider__slide">
+          <p class="text--enjoy">Enjoy!</p>
         </div>
       </div>
-      <button class="btn start-btn">START</button>
-    </div>
+      <button class="btn btn--start">Start</button>
+    </section>
 
-    <div class="pick-image-page flex-center margin-top-bottom gap-8">
-      <h4 class="subheading">Pick an Image</h4>
-      <div class="images">
-        <img class="img" src="assets/imgs/michael-scott.jpeg" alt="M. Scott from The Office TV Show">
-        <img class="img" src="assets/imgs/joey.jpeg" alt="Joey from Friends TV">
-        <img class="img" src="assets/imgs/barney.jpeg" alt="Barney from HIMYM TV Show">
+    <section class="section-image-selection">
+      <h4 class="image-selection__heading heading-secondary">Pick an Image</h4>
+      <div class="image-box">
+        <img class="image-box__img" src="assets/imgs/michael-scott.jpeg" alt="M. Scott from The Office TV Show">
+        <img class="image-box__img" src="assets/imgs/joey.jpeg" alt="Joey from Friends TV">
+        <img class="image-box__img" src="assets/imgs/barney.jpeg" alt="Barney from HIMYM TV Show">
       </div>
-      <button class="btn continue-btn">Continue</button>
-    </div>
+      <button class="btn btn--continue hidden">Continue</button>
+    </section>
 
-    <div class="puzzle-page flex-center margin-top-bottom">
+
+    <section class="section-puzzle">
       <div class="puzzle-card">
       </div>
-      <div class="shuffle-card flex-center">
-        <h4 class="subheading">Select Shuffle Amount</h4>
+      <div class="puzzle-shuffle-box">
+        <h4 class="heading-secondary">Select Shuffle Amount</h4>
         <div class="dropdown">
-          <button class="dropdown-btn">Choose shuffle
+          <button class="dropdown__btn">Choose shuffle
             <span>&#9662;</span>
           </button>
-          <ul class="options display-none">
-            <li class="option option-0 chosen-default" aria-disabled="true">Choose shuffle</li>
-            <li class="option option-1">3 moves</li>
-            <li class="option option-2">30 moves</li>
+          <ul class="dropdown__options hidden">
+            <li class="dropdown__option default" aria-disabled="true">Choose shuffle</li>
+            <li class="dropdown__option">
+              <input name="moves" id="3" type="radio" class="dropdown__option-input">
+              <label class="dropdown__option-label" for="3">3 moves</label>
+            </li>
+            <li class="dropdown__option">
+              <input name="moves" id="30" type="radio" class="dropdown__option-input">
+              <label class="dropdown__option-label" for="30">30 moves</label>
+            </li>
           </ul>
-          <button class="btn start-shuffle-btn display-none">START</button>
         </div>
+        <button class="btn btn--shuffle hidden">Start</button>
       </div>
-    </div>
+    </section>
+
   </body>
 
 </html>

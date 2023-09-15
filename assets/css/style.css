@@ -1,0 +1,183 @@
+@keyframes slideAnimation {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
+
+body {
+  font-family: 'Thasadith', sans-serif;
+  font-size: 1.6rem; }
+
+.heading-primary {
+  font-size: 5.2rem; }
+
+.heading-secondary {
+  font-size: 3.2rem; }
+
+.text {
+  line-height: 3; }
+  .text--enjoy {
+    font-size: 2.6rem; }
+
+.hidden {
+  opacity: 0;
+  visibility: hidden; }
+
+.default {
+  background-color: #0080ff;
+  color: #fff; }
+
+.btn {
+  padding: 1.4rem 3.2rem;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background-color: #f44336;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  cursor: pointer; }
+  .btn:hover {
+    border: 1px solid #f44336;
+    background-color: #ffffff;
+    color: #f44336;
+    box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.3); }
+  .btn--continue {
+    text-transform: none; }
+  .btn--shuffle {
+    align-self: center;
+    position: absolute;
+    top: 11rem; }
+
+.dropdown {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%; }
+  .dropdown__btn {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 2rem;
+    border: 1px solid #c5c5c5;
+    color: #333333;
+    font-size: inherit; }
+    .dropdown__btn:hover {
+      cursor: pointer; }
+  .dropdown__options {
+    z-index: 1;
+    list-style: none;
+    border: 1px solid #c5c5c5;
+    background-color: #ffffff;
+    color: #333333;
+    font-family: Arial; }
+  .dropdown__option {
+    border: 1px solid transparent; }
+    .dropdown__option:first-child {
+      pointer-events: none !important;
+      padding: 0.5rem 1rem;
+      opacity: 0.4; }
+    .dropdown__option:hover,
+    .dropdown__option-input:checked ~ .dropdown__option-label {
+      background-color: #007fff;
+      color: #ffffff; }
+    .dropdown__option-input {
+      display: none; }
+    .dropdown__option-label {
+      display: block;
+      padding: 0.5rem 1rem; }
+
+.image-box {
+  display: grid;
+  width: 55rem;
+  grid-template-columns: 1fr 1fr 1fr; }
+  .image-box__img {
+    width: 100%;
+    height: 100%;
+    border: 10px solid transparent;
+    border-radius: 20px;
+    transition: all 0.3s; }
+    .image-box__img:hover {
+      opacity: 0.5;
+      cursor: pointer; }
+    .image-box__img--small {
+      border: 10px solid #ffffff;
+      box-shadow: 1px 1px 15px 5px rgba(0, 0, 0, 0.3); }
+
+.slider {
+  position: relative;
+  width: 52rem;
+  height: 26rem;
+  box-shadow: 0 0.1rem 1.5rem 0.5rem rgba(0, 0, 0, 0.05); }
+  .slider__slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0; }
+    .slider__slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; }
+    .slider__slide--active {
+      animation: slideAnimation 4s; }
+
+.puzzle-card {
+  position: relative;
+  width: 50rem;
+  height: 50rem;
+  border: 1px solid #c5c5c5;
+  border-radius: 17px;
+  background-color: #f3f1f1; }
+  .puzzle-card__img {
+    border: 2px solid #008000; }
+    .puzzle-card__img:hover {
+      opacity: 1;
+      cursor: default; }
+
+.puzzle-shuffle-box {
+  gap: 2rem;
+  position: relative; }
+  .puzzle-shuffle-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+
+.section-homepage,
+.section-image-selection {
+  gap: 8rem;
+  min-height: 100vh; }
+  .section-homepage,
+  .section-image-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+
+.section-puzzle {
+  gap: 2.6rem;
+  min-height: 100vh; }
+  .section-puzzle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }

@@ -1,0 +1,12 @@
+.section-homepage,
+.section-image-selection {
+  @include flexCenter;
+  gap: $gutter-horizontal-big;
+  min-height: 100vh;
+}
+
+.section-puzzle {
+  @include flexCenter;
+  gap: $gutter-horizontal-small;
+  min-height: 100vh;
+}

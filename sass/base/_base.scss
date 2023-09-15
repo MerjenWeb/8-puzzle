@@ -1,0 +1,21 @@
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // This shouldn't be in pixels as we overwrite the browser settings that the user can manually change in the settings.
+  // For example, when people have bad eyesight, they increase the default font-size of their browser.
+  // If we set the font to 10px, then we remove the ability for these people to see our website properly, because they won't be able to change the default font-size. They can CHANGE it, but our font-size WON'T be affected by that.
+  // It will always be 10px, no matter what the user has as the default size.
+  // font-size: 100%; - 16px
+  // 10/16 = .625
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}

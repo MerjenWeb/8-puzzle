@@ -1,0 +1,24 @@
+.puzzle {
+  &-card {
+    position: relative;
+    width: 50rem;
+    height: 50rem;
+    border: 1px solid $color-grey-2;
+    border-radius: 17px;
+    background-color: $color-grey-1;
+
+    &__img {
+      border: 2px solid $color-green-border;
+
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+    }
+  }
+  &-shuffle-box {
+    @include flexCenter;
+    gap: 2rem;
+    position: relative;
+  }
+}

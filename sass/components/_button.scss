@@ -1,0 +1,29 @@
+.btn {
+  padding: 1.4rem 3.2rem;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background-color: $color-red-button;
+  color: $color-white;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid $color-red-button;
+    background-color: $color-white;
+    color: $color-red-button;
+    box-shadow: 0 10px 18px 0 rgba($color-black, 0.3);
+  }
+
+  &--continue {
+    text-transform: none;
+  }
+
+  &--shuffle {
+    align-self: center;
+    position: absolute;
+    top: 11rem;
+  }
+}

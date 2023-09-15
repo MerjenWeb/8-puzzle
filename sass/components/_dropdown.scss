@@ -1,0 +1,56 @@
+// Styling
+.dropdown {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__btn {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 2rem;
+    border: 1px solid $color-grey-2;
+    color: $color-grey-3;
+    font-size: inherit;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  // The box of options that is being dropped down
+  &__options {
+    z-index: 1;
+    list-style: none;
+    border: 1px solid $color-grey-2;
+    background-color: $color-white;
+    color: $color-grey-3;
+    font-family: Arial;
+  }
+
+  &__option {
+    border: 1px solid transparent;
+
+    &:first-child {
+      pointer-events: none !important;
+      padding: 0.5rem 1rem;
+      opacity: 0.4;
+    }
+
+    &:hover,
+    &-input:checked ~ &-label {
+      background-color: $color-blue-2;
+      color: $color-white;
+    }
+
+    &-input {
+      display: none;
+    }
+
+    &-label {
+      display: block;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
