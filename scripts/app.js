@@ -17,7 +17,6 @@ let slideIndex = 0; // Start point
 
 // Images
 const imgs = [...document.querySelectorAll('.image-box__img')];
-console.log(imgs);
 let activeImgIndex = -1;
 
 // Shuffle / Dropdown
@@ -27,6 +26,9 @@ const dropdownListEl = document.querySelector('.dropdown__options');
 const dropdownListItems = [...document.querySelectorAll('.dropdown__option')];
 const dropdownOptionLabel = [
   ...document.querySelectorAll('.dropdown__option-label'),
+];
+const dropdownOptionInput = [
+  ...document.querySelectorAll('.dropdown__option-input'),
 ];
 let activeMovesAmount;
 let isOpen = false;
@@ -94,9 +96,7 @@ function showPuzzlePage() {
 
   image.classList.remove('image-box__img--small');
   image.classList.add('puzzle-card__img');
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Get references to the image and container
-  console.log(puzzleCard, image);
+
   const numRows = 3;
   const numCols = 3;
   const imageWidth = 480;
@@ -110,41 +110,47 @@ function showPuzzlePage() {
       div.style.position = 'absolute';
       div.style.width = `${divWidth}px`;
       div.style.height = `${divHeight}px`;
-      div.style.left = `${j * divWidth}px`;
-      div.style.top = `${i * divHeight}px`;
+      div.style.left = `${j * (divWidth + 1.5)}px`;
+      div.style.top = `${i * (divHeight + 1.5)}px`;
       div.style.backgroundImage = `url(${image.src})`;
       div.style.backgroundPosition = `-${j * divWidth}px -${i * divHeight}px`;
-      div.style.border = '2px solid green'; // Optional: Add borders for better visualization
-      div.style.margin = '10px'; // Optional: Add borders for better visualization
-      div.style.borderRadius = '17px'; // Optional: Add borders for better visualization
-      div.style.gap = '5px'; // Optional: Add borders for better visualization
+      div.style.border = '2px solid green';
+      div.style.margin = '7px';
+      div.style.borderRadius = '17px';
+      div.style.gap = '5px';
+      div.classList.add('div');
       puzzleCard.appendChild(div);
+      console.log(div.classList);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  }
+  for (let [i, el] of Object.entries(puzzleCard)) {
+    console.log(i, el);
   }
 }
+
 // Select Shuffle Amount
 dropdownBtn.addEventListener('click', function () {
-  dropdownListItems[0].classList.add('default');
   dropdownListEl.classList.toggle('hidden');
   if (activeMovesAmount !== undefined) shuffleBtn.classList.remove('hidden');
+  else dropdownListItems[0].classList.add('default');
 });
 
 dropdownListItems.forEach((el, i) => {
   el.addEventListener('click', function () {
     dropdownBtn.textContent = dropdownOptionLabel[i - 1].innerHTML;
     const chosenMoves = dropdownBtn.textContent;
-    console.log(chosenMoves);
     dropdownListEl.classList.add('hidden');
     shuffleBtn.classList.remove('hidden');
     activeMovesAmount = chosenMoves.replace(/\D/g, '');
-    console.log(activeMovesAmount); //logs 2 times
   });
 });
 
-// document.addEventListener('click', function (event) {
-//   if (!dropdownBox.classList.contains('hidden')) {
-//     dropdownListEl.classList.toggle('hidden');
+// puzzlePage.addEventListener('click', function (event) {
+//   for (let input of dropdownOptionInput) {
+//     if (event.target !== input) {
+//
+//       dropdownListEl.classList.add('hidden');
+//     }
 //   }
 // });
 
