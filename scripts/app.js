@@ -16,11 +16,11 @@ const slides = [...document.querySelectorAll('.slider__slide')];
 let slideIndex = 0; // Start point
 
 // Images
-const imgs = [...document.querySelectorAll('.image-box__img')];
+const imgs = [...document.querySelectorAll('.image')];
 let activeImgIndex = -1;
 
 // Shuffle / Dropdown
-const puzzleCard = document.querySelector('.puzzle-card');
+const puzzleBox = document.querySelector('.puzzle-box');
 const dropdownBox = document.querySelector('.dropdown');
 const dropdownListEl = document.querySelector('.dropdown__options');
 const dropdownListItems = [...document.querySelectorAll('.dropdown__option')];
@@ -69,6 +69,9 @@ function slide() {
 function showImgPickPage() {
   homePage.style.display = 'none';
   imgPickPage.style.display = 'flex';
+  for (let i = 0; i < imgs.length; i++) {
+    imgs[i].classList.add('image-box__img');
+  }
 }
 
 function handleImageClickEvents() {
@@ -92,39 +95,41 @@ function handleImageClickEvents() {
 function showPuzzlePage() {
   imgPickPage.style.display = 'none';
   puzzlePage.style.display = 'flex';
-  const image = imgs[activeImgIndex];
 
-  image.classList.remove('image-box__img--small');
-  image.classList.add('puzzle-card__img');
+  const activeImg = imgs[activeImgIndex];
 
-  const numRows = 3;
-  const numCols = 3;
-  const imageWidth = 480;
-  const divWidth = imageWidth / numCols;
-  const divHeight = imageWidth / numRows;
+  console.log(puzzleBox.clientHeight); // 496, 2px border from each side
 
-  // Loop through each container and its corresponding image
-  for (let i = 0; i < numRows; i++) {
-    for (let j = 0; j < numCols; j++) {
-      const div = document.createElement('div');
-      div.style.position = 'absolute';
-      div.style.width = `${divWidth}px`;
-      div.style.height = `${divHeight}px`;
-      div.style.left = `${j * (divWidth + 1.5)}px`;
-      div.style.top = `${i * (divHeight + 1.5)}px`;
-      div.style.backgroundImage = `url(${image.src})`;
-      div.style.backgroundPosition = `-${j * divWidth}px -${i * divHeight}px`;
-      div.style.border = '2px solid green';
-      div.style.margin = '7px';
-      div.style.borderRadius = '17px';
-      div.style.gap = '5px';
-      div.classList.add('div');
-      puzzleCard.appendChild(div);
-      console.log(div.classList);
+  const boxWidth = puzzleBox.clientWidth - 12;
+  const boxHeight = puzzleBox.clientHeight - 12;
+
+  const rows = 3;
+  const cols = 3;
+  const pieceMargin = 1.5;
+
+  const pieceWidth = Math.floor((boxWidth - (cols - 1) * pieceMargin) / cols);
+  const pieceHeight = Math.floor((boxHeight - (rows - 1) * pieceMargin) / rows);
+
+  console.log(boxWidth);
+
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      const piece = document.createElement('div');
+      piece.style.position = 'absolute';
+      piece.style.width = `${pieceWidth}px`;
+      piece.style.height = `${pieceHeight}px`;
+      piece.style.left = `${j * (pieceWidth + pieceMargin)}px`; // Include margin
+      piece.style.top = `${i * (pieceHeight + pieceMargin)}px`; // Include margin
+      piece.style.backgroundImage = `url(${activeImg.src})`;
+      piece.style.backgroundPosition = `-${j * pieceWidth}px -${
+        i * pieceHeight
+      }px`;
+      piece.style.border = '1px solid green';
+      piece.style.margin = '6.5px';
+      piece.style.borderRadius = '17px';
+      puzzleBox.appendChild(piece);
+      console.log(pieceWidth);
     }
-  }
-  for (let [i, el] of Object.entries(puzzleCard)) {
-    console.log(i, el);
   }
 }
 

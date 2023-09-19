@@ -140,18 +140,13 @@ body {
     .slider__slide--active {
       animation: slideAnimation 4s; }
 
-.puzzle-card {
+.puzzle-box {
   position: relative;
   width: 50rem;
   height: 50rem;
-  border: 1px solid #c5c5c5;
+  border: 2px solid #c5c5c5;
   border-radius: 17px;
   background-color: #f3f1f1; }
-  .puzzle-card__img {
-    border: 2px solid #008000; }
-    .puzzle-card__img:hover {
-      opacity: 1;
-      cursor: default; }
 
 .puzzle-shuffle-box {
   gap: 2rem;
