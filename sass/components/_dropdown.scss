@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
 
   &__btn {
     display: flex;
@@ -30,8 +30,6 @@
   }
 
   &__option {
-    border: 1px solid transparent;
-
     &:first-child {
       pointer-events: none !important;
       padding: 0.5rem 1rem;
