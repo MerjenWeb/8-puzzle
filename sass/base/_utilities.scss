@@ -3,6 +3,10 @@
   visibility: hidden;
 }
 
+.empty {
+  display: none;
+}
+
 .default {
   background-color: $color-blue-3;
   color: #fff;

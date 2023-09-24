@@ -20,6 +20,11 @@ html {
 
 body {
   box-sizing: border-box; }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
 
 body {
   font-family: 'Thasadith', sans-serif;
@@ -39,6 +44,9 @@ body {
 .hidden {
   opacity: 0;
   visibility: hidden; }
+
+.empty {
+  display: none; }
 
 .default {
   background-color: #0080ff;
@@ -155,22 +163,22 @@ body {
     align-items: center;
     justify-content: center; }
 
+.piece {
+  transition: all 0.3s ease; }
+
 .section-homepage,
-.section-image-selection {
+.section-image-selection,
+.section-puzzle {
   gap: 8rem;
-  min-height: 100vh; }
+  width: 60rem;
+  height: 80rem; }
   .section-homepage,
-  .section-image-selection {
+  .section-image-selection,
+  .section-puzzle {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center; }
 
 .section-puzzle {
-  gap: 2.6rem;
-  min-height: 100vh; }
-  .section-puzzle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; }
+  gap: 2.6rem; }

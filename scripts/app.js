@@ -34,12 +34,16 @@ const dropdownOptionInput = [
 let activeMovesAmount = -1;
 let isClicked = false;
 let isOpen = false;
+let piecesArr;
+let pieceWidth;
+let pieceHeight;
 
 // SEQUENCE
 initialState();
 startBtn.addEventListener('click', showImgPickPage);
 handleImageClickEvents(); // returns the image that was chosen
 continueBtn.addEventListener('click', showPuzzlePage);
+initializeDropdown();
 
 // INITIAL STATE
 function initialState() {
@@ -67,7 +71,7 @@ function slide() {
   }
 }
 
-// Pick an image
+// Pick an image page
 function showImgPickPage() {
   homePage.style.display = 'none';
   imgPickPage.style.display = 'flex';
@@ -76,6 +80,7 @@ function showImgPickPage() {
   }
 }
 
+// Getting an index of a chosen image
 function handleImageClickEvents() {
   for (const [i, img] of imgs.entries()) {
     img.addEventListener('click', function () {
@@ -92,86 +97,105 @@ function handleImageClickEvents() {
   }
 }
 
-// Select Shuffle Amount - dropdown button
-dropdownBtn.addEventListener('click', function (event) {
-  // By default, most events in JavaScript bubble, which means they follow the bubbling phase unless explicitly stopped.
-  //For example, when you click on a button within a larger container element, the click event first reaches the button element, then travels up through its parent elements. This allows you to capture the event at various levels of the hierarchy and respond to it as needed.
-  event.stopPropagation();
-  isClicked = true;
-  dropdownListUl.classList.toggle('hidden');
-  if (activeMovesAmount !== undefined) shuffleBtn.classList.remove('hidden');
-  else dropdownListLi[0].classList.add('default');
-});
-
-// Hiding the list items when clicked outside of the List
-puzzlePage.addEventListener('click', function (event) {
-  if (isClicked) {
-    dropdownListUl.classList.add('hidden');
-  }
-});
-
-// Select Shuffle Amount - choose moves amount
-for (let i = 1; i < dropdownListLi.length; i++) {
-  dropdownListLi[i].addEventListener('click', function () {
-    dropdownBtn.textContent = dropdownOptionLabel[i - 1].innerHTML;
-    activeMovesAmount = dropdownOptionInput[i - 1].id;
-    dropdownListUl.classList.add('hidden');
-    shuffleBtn.classList.remove('hidden');
-  });
-}
-
-dropdownListUl.addEventListener('mouseover', function () {
-  dropdownListLi[0].classList.remove('default');
-  // console.log(`this ${activeMovesAmount}`);
-});
-
 // Puzzle page
 function showPuzzlePage() {
   imgPickPage.style.display = 'none';
   puzzlePage.style.display = 'flex';
+  handlePuzzlePieces();
+}
 
-  const activeImg = imgs[activeImgIndex];
+// Dropdown functionality
+function initializeDropdown() {
+  // Select Shuffle Amount - dropdown button
+  dropdownBtn.addEventListener('click', function (event) {
+    // By default, most events in JavaScript bubble, which means they follow the bubbling phase unless explicitly stopped.
+    //For example, when you click on a button within a larger container element, the click event first reaches the button element, then travels up through its parent elements. This allows you to capture the event at various levels of the hierarchy and respond to it as needed.
+    event.stopPropagation();
+    isClicked = true;
+    dropdownListUl.classList.toggle('hidden');
+    if (activeMovesAmount !== undefined) shuffleBtn.classList.remove('hidden');
+    else dropdownListLi[0].classList.add('default');
+  });
 
-  console.log(puzzleBox.clientHeight); // 496, 2px border from each side
+  // Hiding the list items when clicked outside of the List
+  puzzlePage.addEventListener('click', function (event) {
+    if (isClicked) {
+      dropdownListUl.classList.add('hidden');
+    }
+  });
 
-  const boxWidth = puzzleBox.clientWidth - 12;
-  const boxHeight = puzzleBox.clientHeight - 12;
+  // Select Shuffle Amount - choose moves amount
+  for (let i = 1; i < dropdownListLi.length; i++) {
+    dropdownListLi[i].addEventListener('click', function () {
+      dropdownBtn.textContent = dropdownOptionLabel[i - 1].innerHTML;
+      activeMovesAmount = dropdownOptionInput[i - 1].id;
+      dropdownListUl.classList.add('hidden');
+      shuffleBtn.classList.remove('hidden');
+    });
+  }
 
-  const rows = 3;
-  const cols = 3;
-  const pieceMargin = 1.5;
+  dropdownListUl.addEventListener('mouseover', function () {
+    dropdownListLi[0].classList.remove('default');
+  });
+}
 
-  const pieceWidth = Math.floor((boxWidth - (cols - 1) * pieceMargin) / cols);
-  const pieceHeight = Math.floor((boxHeight - (rows - 1) * pieceMargin) / rows);
+// Puzzle game
+function createPiece(pieceWidth, pieceHeight, pieceMargin, i, j) {
+  const piece = document.createElement('div');
+  piece.classList.add('piece');
+  piece.style.position = 'absolute';
+  piece.style.width = `${pieceWidth}px`;
+  piece.style.height = `${pieceHeight}px`;
+  piece.style.left = `${j * (pieceWidth + pieceMargin)}px`;
+  piece.style.top = `${i * (pieceHeight + pieceMargin)}px`;
+  piece.style.backgroundImage = `url(${imgs[activeImgIndex].src})`;
+  piece.style.backgroundPosition = `-${j * pieceWidth}px -${i * pieceHeight}px`;
+  piece.style.border = '1px solid green';
+  piece.style.margin = '6.5px';
+  piece.style.borderRadius = '17px';
+  // + 1 to make it 1-based
+  piece.dataset.row = i + 1; // row major
+  piece.dataset.col = j + 1;
+  return piece;
+}
 
-  // console.log(boxWidth);
+function initializePuzzle(puzzleBox, rows, cols, pieceMargin) {
+  pieceWidth = Math.floor(
+    (puzzleBox.clientWidth - 12 - (cols - 1) * pieceMargin) / cols
+  );
+  pieceHeight = Math.floor(
+    (puzzleBox.clientHeight - 12 - (rows - 1) * pieceMargin) / rows
+  );
+
+  piecesArr = new Array(rows).fill(null).map(() => new Array(cols).fill(null));
 
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      const piece = document.createElement('div');
-      piece.classList.add('piece');
-      piece.style.position = 'absolute';
-      piece.style.width = `${pieceWidth}px`;
-      piece.style.height = `${pieceHeight}px`;
-      piece.style.left = `${j * (pieceWidth + pieceMargin)}px`;
-      piece.style.top = `${i * (pieceHeight + pieceMargin)}px`;
-      piece.style.backgroundImage = `url(${activeImg.src})`;
-      piece.style.backgroundPosition = `-${j * pieceWidth}px -${
-        i * pieceHeight
-      }px`;
-      piece.style.border = '1px solid green';
-      piece.style.margin = '6.5px';
-      piece.style.borderRadius = '17px';
+      const piece = createPiece(pieceWidth, pieceHeight, pieceMargin, i, j);
       puzzleBox.appendChild(piece);
+      // Update the puzzle board with piece positions
+      piecesArr[i][j] = piece;
     }
   }
-  console.log(puzzleBox);
-  const pieceEl = [...document.querySelectorAll('.piece')];
-  pieceEl[0].style.display = 'none';
-  pieceEl.forEach(el => {
-    el.addEventListener('click', function () {
-      // move to the empty space
-      // check if there is an empty space next to the puzzle that is being clicke, if no, then dont move, if yes, then move to that place
+
+  //Set the initial empty position
+  const pieceElArr = [...document.querySelectorAll('.piece')];
+  pieceElArr[0].classList.add('empty');
+
+  pieceElArr.forEach(piece => {
+    piece.addEventListener('click', function () {
+      const clickedRow = +piece.dataset.row;
+      const clickedCol = +piece.dataset.col;
+      const coords = [clickedRow, clickedCol];
     });
   });
+  return piecesArr;
+}
+
+function handlePuzzlePieces() {
+  const rows = 3;
+  const cols = 3;
+  const pieceMargin = 1.5;
+  const puzzlePieces = initializePuzzle(puzzleBox, rows, cols, pieceMargin);
+  console.log(puzzlePieces);
 }

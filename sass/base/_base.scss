@@ -17,5 +17,6 @@ html {
 }
 
 body {
+  @include flexCenter;
   box-sizing: border-box;
 }
